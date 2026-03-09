@@ -1,0 +1,15 @@
+{
+  "name": "treinador-ia",
+  "version": "1.0.0",
+  "description": "IA treinador para WhatsApp",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "@supabase/supabase-js": "^2.39.0",
+    "axios": "^1.6.7"
+  }
+}
