@@ -256,12 +256,12 @@ app.post('/webhook', async (req, res) => {
         if (body.event !== "messages.upsert") return res.sendStatus(200);
 
         const messageData = body.data;
-        const remoteJid = messageData.key?.remoteJid;
+        const phone = messageData.key?.remoteJid;
         const messageText = messageData.message?.conversation || messageData.message?.extendedTextMessage?.text;
 
-        if (!remoteJid || !messageText) return res.sendStatus(200);
+        if (!phone || !messageText) return res.sendStatus(200);
 
-        const phone = remoteJid.split('@')[0];
+        const phone = phone.split('@')[0];
 
         // 1. Buscar Atleta no Supabase
         let { data: atleta, error } = await supabase
@@ -291,7 +291,7 @@ app.post('/webhook', async (req, res) => {
 
         // 3. Enviar Resposta via Evolution API
         await axios.post(`${EVO_URL}/message/sendText/${EVO_INSTANCE}`, {
-            number: remoteJid,
+            number: phone,
             text: respostaIA
         }, {
             headers: { 'apikey': EVO_KEY }
